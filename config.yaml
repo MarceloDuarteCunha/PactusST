@@ -1,0 +1,16 @@
+credentials:
+  usernames:
+    naoto:
+      email: naoto@gmail.com
+      logged_in: False
+      name: Naoto
+      password: abcd1234
+    douglas:
+      email: douglas@gmail.com
+      logged_in: False
+      name: Douglas
+      password: abcd1234
+cookie:
+  expiry_days: 1
+  key: some_signature_key
+  name: some_cookie_name
