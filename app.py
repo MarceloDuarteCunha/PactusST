@@ -25,8 +25,8 @@ def load_data(file_path):
     # Converter valores para float
     df['Valor no Centro de Custo'] = df['Valor no Centro de Custo'].astype(float)
     # Converter a coluna de data de string para datetime
-    df['Data Original Vencimento'] = pd.to_datetime(df['Data Original Vencimento'], format='%d/%m/%Y', errors='coerce')
-    df["Data Original Vencimento"] = df["Data Original Vencimento"].dt.normalize()
+    df['Data movimento'] = pd.to_datetime(df['Data movimento'], format='%d/%m/%Y', errors='coerce')
+    df["Data movimento"] = df["Data movimento"].dt.normalize()
     return df
 
 # -------------------------------------------------------------- Configurando Página
@@ -37,7 +37,7 @@ st.set_page_config(
     page_icon=":bar_chart:",
 )
 
-st.sidebar.image("logo_pactus.png", width=200)
+st.sidebar.image("teste.png", width=200)
 
 st.title("Relatório de lançamentos por centro de custo")
 
@@ -88,8 +88,8 @@ if data_final < data_inicial:
 
 condicoes = []
 
-condicoes.append(df["Data Original Vencimento"] >= data_inicial)
-condicoes.append(df["Data Original Vencimento"] <= data_final)
+condicoes.append(df["Data movimento"] >= data_inicial)
+condicoes.append(df["Data movimento"] <= data_final)
 if "TODOS" not in agenda_selecionadas: 
     condicoes.append(df["Centro de Custo"].isin(lista_agenda))
 
@@ -113,7 +113,7 @@ col1, col2, col3 = st.columns(3, gap="small")
 
 with col1:
     st.metric(
-        label="Total de Crédido",
+        label="Total de Crédito",
         value=currency_format(total_credito)
     )
 with col2:
@@ -129,7 +129,7 @@ with col3:
 
 # Configurar as opções do AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
-gb.configure_column("Data Original Vencimento", header_name="Data", type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='dd/MM/yyyy', pivot=True)
+gb.configure_column("Data movimento", header_name="Data", type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='dd/MM/yyyy', pivot=True)
 gb.configure_column(
     "Valor no Centro de Custo", 
     header_name="Valor", 
@@ -160,6 +160,8 @@ gb.configure_column("Descrição", header_name="Descrição", hide=True)
 gb.configure_column("Tipo Operação", header_name="Tipo", hide=True)
 gb.configure_column("Centro de Custo", header_name="Centro de Custo", hide=True)
 gb.configure_column("Categoria", header_name="Categoria", hide=True)
+gb.configure_column("Data Original Vencimento", header_name="Descrição", hide=True)
+gb.configure_column("Data de competência", header_name="Tipo", hide=True)
 
 gb.configure_default_column(
     resizable=True,
@@ -200,7 +202,7 @@ gridOptions["getDataPath"] = JsCode("""
 
 # Exibir o DataFrame e o AgGrid
 r = AgGrid(
-    df[['Tipo Operação', 'Centro de Custo', 'Categoria', 'Descrição', 'Valor no Centro de Custo', 'Data Original Vencimento']],
+    df[['Tipo Operação', 'Centro de Custo', 'Categoria', 'Descrição', 'Valor no Centro de Custo', 'Data movimento']],
     gridOptions=gridOptions,
     sizeToFit=True,
     height=2000,
