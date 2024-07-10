@@ -12,9 +12,9 @@ from db.database_interface import DatabaseInterface
 class DatabaseBigQuery(DatabaseInterface):
 
     def __init__(self):
+        self.database = os.environ.get('DATABASE_URL')        
         self.credencial = self.get_credential()
         self.client = self.get_client()
-        self.database = os.environ.get('DATABASE_URL')
 
     def __str__(self) -> str:
         return f"BigQuery: {PROJECT_ID}.{DATASET_ID}"
