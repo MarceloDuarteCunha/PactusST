@@ -133,11 +133,12 @@ if authentication_status:
         st.stop()
 
     # -------------------------------------------------------------- Calcular o saldo
+    df_grupos = df.groupby("Tipo Operação")["Valor no Centro de Custo"].sum().reset_index()
 
-    df_credito = df['Valor no Centro de Custo'].apply(lambda x: x if x > 0 else 0)
-    df_debito = df['Valor no Centro de Custo'].apply(lambda x: x if x < 0 else 0)
-    total_debito = df_debito.sum()
-    total_credito = df_credito.sum()
+    df_debito = df_grupos.loc[df_grupos["Tipo Operação"] == "Débito"]
+    df_credito = df_grupos.loc[df_grupos["Tipo Operação"] == "Débito"]
+    total_debito = df_debito["Valor no Centro de Custo"]
+    total_credito = df_credito["Valor no Centro de Custo"]
     saldo = total_credito + total_debito
 
     # Configurar Cards
