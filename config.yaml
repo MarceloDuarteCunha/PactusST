@@ -10,7 +10,7 @@ credentials:
       logged_in: False
       name: Douglas
       password: abcd1234
-    douglas:
+    verth:
       email: verth@gmail.com
       logged_in: False
       name: verth
