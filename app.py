@@ -28,11 +28,11 @@ def currency_format(val):
 # Função para carregar e preparar os dados
 def load_data():
 
-    db = DatabaseBigQuery().get_client()
+    db = DatabaseBigQuery()
 
     # Carrega base de dados de Ligações Agendadas
     sql_cidades = "SELECT * FROM `datametria.PLANUS.extrato_por_centro_de_custo` where TRUE"
-    df = db.query(sql_cidades).to_dataframe()
+    df = db.get_client().query(sql_cidades).to_dataframe()
 
     # Remover espaços em branco das colunas
     df.columns = df.columns.str.strip()
