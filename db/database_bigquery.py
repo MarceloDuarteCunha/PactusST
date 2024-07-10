@@ -12,7 +12,7 @@ from db.database_interface import DatabaseInterface
 class DatabaseBigQuery(DatabaseInterface):
 
     def __init__(self):
-        self.database = os.environ.get('DATABASE_URL')        
+        self.database = os.environ.get('JSON')
         self.credencial = self.get_credential()
         self.client = self.get_client()
 
