@@ -136,7 +136,7 @@ if authentication_status:
     df_grupos = df.groupby("Tipo Operação")["Valor no Centro de Custo"].sum().reset_index()
 
     df_debito = df_grupos.loc[df_grupos["Tipo Operação"] == "Débito"]
-    df_credito = df_grupos.loc[df_grupos["Tipo Operação"] == "Débito"]
+    df_credito = df_grupos.loc[df_grupos["Tipo Operação"] == "Crédito"]
     total_debito = df_debito["Valor no Centro de Custo"].sum()
     total_credito = df_credito["Valor no Centro de Custo"].sum()
     saldo = total_credito + total_debito
