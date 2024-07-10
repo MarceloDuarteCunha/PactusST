@@ -3,7 +3,8 @@ from google.oauth2 import service_account
 from google.cloud import bigquery
 import pandas as pd
 import pandas_gbq
-sys.path.insert(0, "C:\\datametria\\DIFFUSION\\")
+
+sys.path.insert(0, os.path.abspath(os.curdir))
 from config.system import *
 from db.database_interface import DatabaseInterface
 
