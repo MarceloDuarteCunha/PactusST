@@ -10,6 +10,11 @@ credentials:
       logged_in: False
       name: Douglas
       password: abcd1234
+    douglas:
+      email: verth@gmail.com
+      logged_in: False
+      name: verth
+      password: abcd1234
 cookie:
   expiry_days: 1
   key: some_signature_key
